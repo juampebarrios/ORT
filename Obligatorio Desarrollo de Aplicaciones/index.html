@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinta Rico - Obligatorio</title>
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="js/code.js"></script>
+</head>
+
+<body>
+
+    <!-- MENU LATERAL -->
+    <ons-splitter>
+
+        <ons-splitter-side id="menu" side="left" width="200px" collapse swipeable>
+            <ons-page>
+                <!-- LISTADO DE SECCIONES -->
+                <ons-list>
+                    <ons-list-item onclick="navigate('signup',true)" tappable>Registrarse</ons-list-item>
+                    <ons-list-item onclick="navigate('login',true)" tappable>Iniciar Sesión</ons-list-item>
+                    <ons-list-item onclick="navigate('products',true)" tappable>Productos</ons-list-item>
+                </ons-list>
+                <!-- LISTADO DE SECCIONES -->
+            </ons-page>
+        </ons-splitter-side>
+        
+        <ons-splitter-content id="content">
+            <ons-navigator id="myNavigator" page="login.html"></ons-navigator>
+        </ons-splitter-content>
+        
+    </ons-splitter>
+    <!-- MENU LATERAL -->
+      
+    <!-- VISTA DE REGISTRO -->
+    <template id="signup.html">
+        <ons-page>
+            <!-- TOOLBAR SUPERIOR -->
+            <ons-toolbar>
+                <div class="left"><ons-toolbar-button icon="md-menu" onclick="openMenu()"></ons-toolbar-button></div> 
+                <div class="center">Registrarse</div>  
+                <div class="right"><ons-toolbar-button icon="fa-door-open" onclick="logOut()"></ons-toolbar-button></div>
+            </ons-toolbar> 
+            <!-- TOOLBAR SUPERIOR -->
+
+            <!-- DATOS PARA REGISTRO -->
+            <div id="signup">
+                <p><ons-input id="txtName" modifier="underbar" placeholder="Nombre" float></ons-input></p>
+                <p><ons-input id="txtLastName" modifier="underbar" placeholder="Apellido" float></ons-input></p>               
+                <p><ons-input id="txtEmail" modifier="underbar" placeholder="Email" float></ons-input></p>               
+                <p><ons-input id="txtAddress" modifier="underbar" placeholder="Dirección" float></ons-input></p>               
+                <p><ons-input id="txtPassword" type="password" modifier="underbar" placeholder="Password" float></ons-input></p>                            
+                <ons-button onclick="signUp()">Registrarse</ons-button>
+            </div>
+            <!-- DATOS PARA REGISTRO -->
+        </ons-page>
+    </template>
+    <!-- VISTA DE REGISTRO -->
+    
+    <!-- VISTA DE LOGIN -->
+    <template id="login.html">
+        <ons-page>
+            <!-- TOOLBAR SUPERIOR -->
+            <ons-toolbar>
+                <div class="left"><ons-toolbar-button icon="md-menu" onclick="openMenu()"></ons-toolbar-button></div> 
+                <div class="center">Iniciar Sesión</div>  
+                <div class="right"><ons-toolbar-button icon="fa-door-open" onclick="logOut()"></ons-toolbar-button></div>
+            </ons-toolbar> 
+            <!-- TOOLBAR SUPERIOR -->
+            
+            <!-- DATOS PARA LOGIN -->
+            <div>
+                <p><ons-input id="txtUserEmail" modifier="underbar" placeholder="Email" float></ons-input></p>  
+                <p><ons-input id="txtUserPassword" modifier="underbar" placeholder="Password" type="password" float></ons-input></p> 
+                <ons-button onclick="logIn()">Ingresar</ons-button>
+            </div>       
+            <!-- DATOS PARA LOGIN -->
+        </ons-page>
+    </template>
+    <!-- VISTA DE LOGIN -->
+    
+    <!-- VISTA DE PRODUCTOS -->
+    <template id="products.html">
+        <ons-page>
+            <!-- TOOLBAR SUPERIOR -->
+            <ons-toolbar>
+                <div class="left"><ons-toolbar-button icon="md-menu" onclick="openMenu()"></ons-toolbar-button></div> 
+                <div class="center">Productos</div>  
+                <div class="right"><ons-toolbar-button icon="fa-door-open" onclick="logOut()"></ons-toolbar-button></div>
+            </ons-toolbar>
+            <!-- TOOLBAR SUPERIOR -->
+            
+            <!-- SCRIPT PARA MOSTRAR PRODUCTOS -->
+            <script>
+                ons.getScriptPage().onShow=getProducts;
+            </script>
+            <!-- SCRIPT PARA MOSTRAR PRODUCTOS -->
+            
+            <!-- DIV PARA MOSTRAR PRODUCTOS -->
+            <div id="homeProducts"></div>
+            <!-- DIV PARA MOSTRAR PRODUCTOS -->
+        </ons-page>
+    </template>
+    <!-- VISTA DE MENÚ -->
+
+    <!-- VISTA DE TABS -->
+    <template id="tabs.html">
+        <ons-page>
+            <ons-tabbar swipeable>
+                <ons-tab page="signup.html" label="Registro" icon="ion-ios-home, material:md-home" badge="7" active></ons-tab>
+                <ons-tab page="products.html" label="Recetas" icon="md-settings" active-icon="md-face"></ons-tab>
+            </ons-tabbar>
+        </ons-page>
+    </template>
+    <!-- VISTA DE TABS -->
+    
+    <!-- VISTA DE DETALLES -->
+    <template id="detailsProduct.html">
+        <ons-page>
+            <!-- TOOLBAR SUPERIOR -->
+            <ons-toolbar>
+                <div class="left"><ons-back-button>Productos</ons-back-button></div>
+                <div class="center">Detalle del Producto</div>
+            </ons-toolbar>       
+            <!-- TOOLBAR SUPERIOR -->
+
+            <!-- SCRIPT PARA MOSTRAR DETALLES -->
+            <script>
+                ons.getScriptPage().onShow=ObtenerDetalle
+            </script>
+            <!-- SCRIPT PARA MOSTRAR DETALLES -->
+
+            <!-- DIV PARA MOSTRAR DETRALLES -->
+            <div id="detail"></div>
+            <!-- DIV PARA MOSTRAR DETRALLES -->
+        </ons-page>
+    </template>
+    <!-- VISTA DE DETALLES -->
+    
+    <div id="message"></div>
+
+</body>
+
+</html>
