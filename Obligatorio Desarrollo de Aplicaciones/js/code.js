@@ -10,7 +10,7 @@ ons.ready(getActiveUser);
 //BUSCA USUARIO ACTIVO
 async function getActiveUser() {
     if (token === null || token === undefined){
-        getToken();
+        token = localStorage.getItem('token');
     }
     if (token) {
         await $.ajax({
@@ -31,11 +31,6 @@ async function getActiveUser() {
             
         })
     }
-}
-
-//OBTENER TOKEN
-function getToken(){
-    token = localStorage.getItem('token');
 }
 
 //ABRIR MENÚ
