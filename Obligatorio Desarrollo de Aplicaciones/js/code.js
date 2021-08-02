@@ -229,7 +229,6 @@ async function getProducts() {
 
 // MOSTRAR PRODUCTOS
 function showProducts(json){
-    console.log(json.data.length);
     if (json.data.length > 0){
         for (let i=0; i <= json.data.length; i++){
             $("#homeProducts").append("<ons-card>");
