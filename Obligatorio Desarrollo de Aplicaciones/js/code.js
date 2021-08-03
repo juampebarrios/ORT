@@ -10,7 +10,7 @@ ons.ready(getActiveUser);
 //BUSCA USUARIO ACTIVO
 async function getActiveUser() {
     if (token === null || token === undefined){
-        token = localStorage.getItem('token');
+        getToken();
     }
     if (token) {
         await $.ajax({
@@ -31,6 +31,11 @@ async function getActiveUser() {
             
         })
     }
+}
+
+//OBTENER TOKEN
+function getToken(){
+    token = localStorage.getItem('token');
 }
 
 //ABRIR MENÚ
@@ -212,7 +217,7 @@ async function getProducts() {
             datatype: "json",
             contentType: "application/json",
             headers: {
-                "x-auth": token
+                "x-auth": localStorage.getItem("token")
             },
             
             success: showProducts,
@@ -227,7 +232,7 @@ function showProducts(json){
     if (json.data.length > 0){
         for (let i=0; i <= json.data.length; i++){
             $("#homeProducts").append("<ons-card>");
-            $("#homeProducts").append(`<img src='${json.data[i].urlImagen}' alt=' ${json.data[i].nombre}  style='width: 100%'>`);
+            $("#homeProducts").append(`<img src='https://ort-tallermoviles.herokuapp.com/assets/imgs/${json.data[i].urlImagen}.jpg' alt=' ${json.data[i].nombre}  style='width: 100%'>`);
             $("#homeProducts").append(`<div class='title'>${json.data[i].nombre}</div>`);
             $("#homeProducts").append(`<div class='content'><div>`);
             $("#homeProducts").append(`<ons-button onclick="viewDetail('${json.data[i]._id}')"><ons-icon icon='ion-ios-share'></ons-icon></ons-button>`);
@@ -238,8 +243,3 @@ function showProducts(json){
         }
     }
 }
-
-
-
-
-
