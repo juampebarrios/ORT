@@ -10,7 +10,7 @@ ons.ready(getActiveUser);
 //BUSCA USUARIO ACTIVO
 async function getActiveUser() {
     if (token === null || token === undefined){
-        getToken();
+        token = localStorage.getItem('token');
     }
     if (token) {
         await $.ajax({
@@ -31,11 +31,6 @@ async function getActiveUser() {
             
         })
     }
-}
-
-//OBTENER TOKEN
-function getToken(){
-    token = localStorage.getItem('token');
 }
 
 //ABRIR MENÚ
@@ -229,7 +224,6 @@ async function getProducts() {
 
 // MOSTRAR PRODUCTOS
 function showProducts(json){
-    console.log(json.data.length);
     if (json.data.length > 0){
         for (let i=0; i <= json.data.length; i++){
             $("#homeProducts").append("<ons-card>");
