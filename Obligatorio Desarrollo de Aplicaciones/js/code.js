@@ -217,7 +217,7 @@ async function getProducts() {
             datatype: "json",
             contentType: "application/json",
             headers: {
-                "x-auth": localStorage.getItem("token")
+                "x-auth": token
             },
             
             success: showProducts,
