@@ -3,6 +3,7 @@ let token;
 let myNavigator;
 let menu;
 let activeUser;
+let activePage;
 
 //AL INICIAR
 ons.ready(getActiveUser);
@@ -63,6 +64,20 @@ function navigate(pageToGo, resetStack, data) {
     }
     if (menu) {
         closeMenu();
+    }
+    switch(pageToGo){
+        case 'login':
+            activePage = 'login';
+            break;
+        case 'signUp':
+            activePage = 'signUp';
+            break;
+        case 'products':
+            activePage = 'products';
+            break;
+        case 'favorites':
+            activePage = 'favorites';
+            break;
     }
 }
 
@@ -205,6 +220,7 @@ async function logIn() {
 // LOGOUT
 function logOut() {
     localStorage.removeItem("token");
+    token = null;
     navigate("login", true);
 }
 
@@ -212,7 +228,7 @@ function logOut() {
 async function getProducts() {
     if(token){
         await $.ajax({
-            url: urlBase + '/productos',
+            url: urlBase + 'productos',
             type: "GET",
             datatype: "json",
             contentType: "application/json",
@@ -229,17 +245,137 @@ async function getProducts() {
 
 // MOSTRAR PRODUCTOS
 function showProducts(json){
-    if (json.data.length > 0){
-        for (let i=0; i <= json.data.length; i++){
-            $("#homeProducts").append("<ons-card>");
-            $("#homeProducts").append(`<img src='https://ort-tallermoviles.herokuapp.com/assets/imgs/${json.data[i].urlImagen}.jpg' alt=' ${json.data[i].nombre}  style='width: 100%'>`);
-            $("#homeProducts").append(`<div class='title'>${json.data[i].nombre}</div>`);
-            $("#homeProducts").append(`<div class='content'><div>`);
-            $("#homeProducts").append(`<ons-button onclick="viewDetail('${json.data[i]._id}')"><ons-icon icon='ion-ios-share'></ons-icon></ons-button>`);
-            $("#homeProducts").append(`<ons-button onclick="addFavourite('${json.data[i]._id}')"><ons-icon icon='ion-ios-thumbs-up"'></ons-icon></ons-button>`);
-            $("#homeProducts").append(`</div>`);
-            $("#homeProducts").append(`</div>`);
-            $("#homeProducts").append(`</ons-card>`);
+    if (activePage === 'products'){
+        if (json.data.length > 0){
+            for (let i=0; i < json.data.length; i++){
+                $("#homeProducts").append("<ons-card>");
+                $("#homeProducts").append(`<img src='https://ort-tallermoviles.herokuapp.com/assets/imgs/${json.data[i].urlImagen}.jpg' alt='${json.data[i].nombre}'  style='width: 100%'>`);
+                $("#homeProducts").append(`<div class='title'>${json.data[i].nombre}</div>`);
+                $("#homeProducts").append(`<div class='content'><div>`);
+                $("#homeProducts").append(`<ons-button onclick="viewDetails('${json.data[i]._id}')"><ons-icon icon='ion-ios-list'></ons-icon></ons-button>`);
+                $("#homeProducts").append(`<ons-button onclick="addFavorite('${json.data[i]._id}')"><ons-icon icon='ion-ios-star'></ons-icon></ons-button>`);
+                $("#homeProducts").append(`<ons-button onclick="buyProduct('${json.data[i]._id}')"><ons-icon icon='ion-ios-card'></ons-icon></ons-button>`);
+                $("#homeProducts").append(`</div>`);
+                $("#homeProducts").append(`</div>`);
+                $("#homeProducts").append(`</ons-card>`);
+            }
+        }
+    }
+    if (activePage === 'favorites'){
+        $("#homeFavorites").append("<ons-card>");
+        $("#homeFavorites").append(`<img src='https://ort-tallermoviles.herokuapp.com/assets/imgs/${json.data.urlImagen}.jpg' alt='${json.data.nombre}'  style='width: 100%'>`);
+        $("#homeFavorites").append(`<div class='title'>${json.data.nombre}</div>`);
+        $("#homeFavorites").append(`<div class='content'><div>`);
+        $("#homeFavorites").append(`<ons-button onclick="viewDetails('${json.data._id}')"><ons-icon icon='ion-ios-list'></ons-icon></ons-button>`);
+        $("#homeFavorites").append(`<ons-button onclick="deleteFavorite('${json.data._id}')"><ons-icon icon='ion-ios-remove-circle-outline'></ons-icon></ons-button>`);
+        $("#homeFavorites").append(`<ons-button onclick="buyProduct('${json.data._id}')"><ons-icon icon='ion-ios-card'></ons-icon></ons-button>`);
+        $("#homeFavorites").append(`</div>`);
+        $("#homeFavorites").append(`</div>`);
+        $("#homeFavorites").append(`</ons-card>`);
+    }
+}
+
+// VER DETALLES
+function viewDetails(idProduct){
+    navigate("detailsProduct", false, data = { idProduct: idProduct });
+}
+
+// OBTENER DETALLES
+async function getDetails(){
+    await $.ajax({
+        url: urlBase + 'productos/' + data.idProduct,
+        type: "GET",
+        dataType: "json",
+        headers: {
+            "x-auth": token
+        },
+        success: function (json) {
+            $("#detail").append("<ons-list>Detalles");
+            $("#detail").append("<ons-list-item>" + json.data.precio + "</ons-list-item>");
+            $("#detail").append("</ons-list>");
+        },
+        error: showError
+    })
+}
+
+// AGREGAR A FAVORITOS
+function addFavorite(idProduct){
+    let favoriteProducts = [];
+    let contains = false;
+
+    if (localStorage.getItem("favorites") != null) {
+        favoriteProducts = JSON.parse(localStorage.getItem("favorites"));
+    }
+    if (favoriteProducts.length > 0) {
+        favoriteProducts.find(function (value) {
+            if (value.idProduct == idProduct && value.user == activeUser) {
+                contains = true;
+            }
+        })
+
+    }
+    if(!contains){
+        favoriteProducts.push({idProduct:idProduct,user:activeUser});
+        localStorage.setItem("favorites",JSON.stringify(favoriteProducts));
+        ons.notification.toast('Se agregó el producto a la lista de favoritos', {
+            timeout: 2000
+        })
+
+    }
+    else{
+        ons.notification.toast('El producto ya está en la lista de favoritos', {
+            timeout: 1500
+        })
+    }
+}
+
+// FUNCION PARA MOSTRAR FAVORITOS
+async function getFavorites(){
+    let favoriteProducts = localStorage.getItem('favorites');
+    let list;
+    
+    if (favoriteProducts !== null){
+        list = JSON.parse(favoriteProducts);
+        
+        for (i=0; i < list.length; i++){
+            if (list[i].user === activeUser){
+                await $.get({
+                    url: urlBase + 'productos/' + list[i].idProduct,
+                    dataType: "json",
+                    headers: {
+                        "x-auth": token
+                    },
+        
+                    success: showProducts,
+                    
+                    error: showError
+                })
+            } 
         }
     }
 }
+
+//FUNCION PARA BORRAR FAVORITO
+async function deleteFavorite(idProduct){
+    let favoriteProducts = localStorage.getItem('favorites');
+    let list;
+
+    if (favoriteProducts != null){
+        list = JSON.parse(favoriteProducts);
+        let i = 0;
+        while (i < list.length){
+            if (list[i].user === activeUser && list[i].idProduct === idProduct){
+                let actualElement = list.indexOf(list[i]);
+                list.splice(actualElement, 1);
+                localStorage.setItem("favorites",JSON.stringify(list));
+                $('#homeFavorites').empty();
+                ons.notification.toast('El producto fue eliminado de la lista de favoritos', {
+                    timeout: 1500
+                })
+                await getFavorites();
+            }
+            i++;
+        }
+    }
+}
+
