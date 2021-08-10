@@ -319,16 +319,25 @@ async function getDetails(){
             "x-auth": token
         },
         success: function (json) {
+            $('#detail').append(`<ons-card>`)
+            $("#detail").append(`<div class='title'> ${json.data.nombre} </div>`);
             $("#detail").append(`<img src='https://ort-tallermoviles.herokuapp.com/assets/imgs/${json.data.urlImagen}.jpg' alt='${json.data.nombre}'  style='width: 100%'>`);
-            $("#detail").append(`${json.data.nombre}`);
+            $('#detail').append(`</ons-card>`)
             $("#detail").append("<ons-list>Detalles");
             $("#detail").append(`<ons-list-item> ${json.data.descripcion}: $${json.data.precio} </ons-list-item>`);
             $("#detail").append(`<ons-list-item> Estado: ${json.data.estado}. </ons-list-item>`);
             $("#detail").append(`<ons-list-item> Calificación: ${json.data.puntaje}. </ons-list-item>`);
-            if (json.data.estado === 'en stock'){
-                $("#detail").append(`<ons-list-item><ons-button onclick="buyProduct('${json.data._id}')"><ons-icon icon='ion-ios-card'></ons-icon></ons-button></ons-list-item>`);
-            }
             $("#detail").append("</ons-list>");
+            if (json.data.estado === 'en stock'){
+                $("#detail").append("<ons-list>Comprar:");
+                $("#detail").append(`<ons-list-item>Seleccionar sucursal:</ons-list-item>`);
+                $("#detail").append(`<ons-select id='selectPlace'>Seleccionar sucursal</ons-select>`);
+                $("#detail").append(`<ons-button onclick="buyProduct('${json.data._id}')"><ons-icon icon='ion-ios-card'></ons-icon></ons-button>`);
+                $("#detail").append("</ons-list>");
+                loadPlaces();
+            }else{
+                
+            }
         },
         error: showError
     })
@@ -415,3 +424,23 @@ async function deleteFavorite(idProduct){
     }
 }
 
+//CARGAR SUCURSALES
+async function loadPlaces(){
+    await $.get({
+        url: urlBase + 'sucursales',
+        datatype: "json",
+        contentType: "application/json",
+        headers: {
+            "x-auth": localStorage.getItem("token")
+        },
+        
+        success: function(json){
+            console.log(json);
+            for (let i=0; i < json.length; i++){
+                $('#selectPlace').append(`<option value='${json[i]._id}'>${json[i].nombre} - ${json[i].direccion}</option>`)
+            }
+        },
+
+        error: showError
+    })
+}
