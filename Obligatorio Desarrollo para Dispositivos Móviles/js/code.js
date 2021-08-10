@@ -4,6 +4,7 @@ let myNavigator;
 let menu;
 let activeUser;
 let activePage;
+let actualPlace;
 
 //AL INICIAR
 ons.ready(getActiveUser);
@@ -318,7 +319,7 @@ async function getDetails(){
         headers: {
             "x-auth": token
         },
-        success: function (json) {
+        success: async function (json) {
             $('#detail').append(`<ons-card>`)
             $("#detail").append(`<div class='title'> ${json.data.nombre} </div>`);
             $("#detail").append(`<img src='https://ort-tallermoviles.herokuapp.com/assets/imgs/${json.data.urlImagen}.jpg' alt='${json.data.nombre}'  style='width: 100%'>`);
@@ -331,10 +332,12 @@ async function getDetails(){
             if (json.data.estado === 'en stock'){
                 $("#detail").append("<ons-list>Comprar:");
                 $("#detail").append(`<ons-list-item>Seleccionar sucursal:</ons-list-item>`);
-                $("#detail").append(`<ons-select id='selectPlace'>Seleccionar sucursal</ons-select>`);
-                $("#detail").append(`<ons-button onclick="buyProduct('${json.data._id}')"><ons-icon icon='ion-ios-card'></ons-icon></ons-button>`);
+                $("#detail").append(`<ons-list-item><ons-select select-id='selectPlace'></ons-select></ons-list-item>`);
+                $("#detail").append(`<ons-list-item>Seleccionar cantidad:</ons-list-item>`);
+                $("#detail").append(`<ons-list-item><ons-input type='number' id="txtTotalOrder" modifier="underbar" placeholder="Cantidad" float></ons-input></ons-list-item>`);
+                $("#detail").append(`<ons-list-item><ons-button onclick="buyProduct('${json.data._id}')"><ons-icon icon='ion-ios-card'></ons-icon></ons-button></ons-list-item>`);
                 $("#detail").append("</ons-list>");
-                loadPlaces();
+                await loadPlaces();
             }else{
                 
             }
@@ -424,7 +427,7 @@ async function deleteFavorite(idProduct){
     }
 }
 
-//CARGAR SUCURSALES
+// FUNCION PARA CARGAR SUCURSALES
 async function loadPlaces(){
     await $.get({
         url: urlBase + 'sucursales',
@@ -436,11 +439,38 @@ async function loadPlaces(){
         
         success: function(json){
             console.log(json);
-            for (let i=0; i < json.length; i++){
-                $('#selectPlace').append(`<option value='${json[i]._id}'>${json[i].nombre} - ${json[i].direccion}</option>`)
+            for (let i=0; i < json.data.length; i++){
+                $('#selectPlace').append(`<option value='${json.data[i]._id}'>${json.data[i].nombre} - ${json.data[i].direccion}</option>`)
             }
         },
 
         error: showError
     })
+}
+
+
+//FUNCION PARA COMPRAR PRODUCTO
+async function buyProduct(idProduct){
+    let totalOrder = $('#txtTotalOrder').val();
+    actualPlace = $('#selectPlace').val();
+
+    let data = {cantidad: totalOrder, idProducto: idProduct, idSucursal: actualPlace};
+
+    if (totalOrder.trim() > 0 && !isNaN(totalOrder)){
+        await $.post({
+            url: urlBase + 'pedidos',
+            datatype: "json",
+            contentType: "application/json",
+            headers: {
+                "x-auth": token
+            },
+            data: JSON.stringify(data),
+            
+            success: function(json){
+                console.log(json);
+            },
+    
+            error: showError
+        })
+    }
 }
