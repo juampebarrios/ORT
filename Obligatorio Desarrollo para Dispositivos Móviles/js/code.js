@@ -303,19 +303,20 @@ function showProducts(json){
         $("#homeFavorites").append(`</div>`);
         $("#homeFavorites").append(`</ons-card>`);
     }
-    if (activePage === 'myCart'){
+    if (activePage === 'mycart'){
         if (json.data.length > 0){
             for (let i=0; i < json.data.length; i++){
-                let precioTotalXProducto = json.data.total * json.data.cantidad;
+                let precioTotalXProducto = json.data[i].total * json.data[i].cantidad;
                 $("#homeCart").append("<ons-card>");
-                $("#homeCart").append(`<img src='https://ort-tallermoviles.herokuapp.com/assets/imgs/${json.data[i].urlImagen}.jpg' alt='${json.data[i].nombre}'  style='width: 100%'>`);
-                $("#homeCart").append(`<div class='title'>${json.data[i].nombre}</div>`);
+                $("#homeCart").append(`<img src='https://ort-tallermoviles.herokuapp.com/assets/imgs/${json.data[i].producto.urlImagen}.jpg' alt='${json.data[i].nombre}'  style='width: 100%'>`);
+                $("#homeCart").append(`<div class='title'>${json.data[i].producto.nombre}</div>`);
                 $("#homeCart").append(`<div class='content'>`);
-                $("#homeCart").append(`<ons-list> Productos Seleccionados: `);
-                $("#homeCart").append(`<ons-list-item>Sucursal de retiro: ${json.sucursal.nombre}</ons-list-item>`);
+                $("#homeCart").append(`<ons-list-item>Sucursal de retiro: ${json.data[i].sucursal.nombre}</ons-list-item>`);
                 $("#homeCart").append(`<ons-list-item>Precio total: ${precioTotalXProducto}</ons-list-item>`);
-                $("#homeCart").append(`<ons-list-item>Estado del pedido: ${json.data.estado}</ons-list-item>`);
-                $("#homeCart").append(`<ons-button onclick="showPrompt()">Prompt</ons-button>`);
+                $("#homeCart").append(`<ons-list-item>Estado del pedido: ${json.data[i].estado}</ons-list-item>`);
+                if(json.data[i].estado === "pendiente"){
+                    $("#homeCart").append(`<ons-button onclick="modalDialog('${json.data[i]._id}')">Comentar</ons-button>`);
+                }
                 $("#homeCart").append(`</div>`);
                 $("#homeCart").append(`</ons-card>`);
             }
@@ -384,7 +385,7 @@ function addFavorite(idProduct){
         favoriteProducts.push({idProduct:idProduct,user:activeUser});
         localStorage.setItem("favorites",JSON.stringify(favoriteProducts));
         ons.notification.toast('Se agregó el producto a la lista de favoritos', {
-            timeout: 2000
+            timeout: 1500
         })
 
     }
@@ -490,7 +491,7 @@ async function buyProduct(idProduct){
             error: showError
         })
     }
-
+}
 
 //FUNCION PARA MOSTRAR PEDIDOS
 async function getCart(){
@@ -499,7 +500,7 @@ async function getCart(){
         datatype: "json",
         contentType: "application/json",
         headers: {
-            "x-auth": localStorage.getItem("token")
+            "x-auth": token
         },
 
         success: showProducts,
@@ -508,22 +509,37 @@ async function getCart(){
     })
 }
 
-function modalDialog(){
-    let showTemplateDialog = function() {
-        let dialog = $('#myDialog').val();
-        if (dialog) {
-          dialog.show();
-        } else {
-          ons.createElement('dialog.html', { append: true })
-            .then(function(dialog) {
-              dialog.show();
-            });
+function modalDialog(idProduct){
+        ons.notification.prompt('Ingrese su comentario')
+        .then(function(input) {
+        let message = input ? 'Su mensaje fue enviado correctamente: ' + input : 'No ha ingresado ningún mensaje!';
+        ons.notification.alert(message);
+        let messageApi = input;
+        if(messageApi.trim().length > 0){
+            changeProductStatus(idProduct, messageApi);
         }
-      };
-      
-      let hideDialog = function(id) {
-        document
-          .getElementById(id)
-          .hide();
-      };
+    });
 }
+
+async function changeProductStatus(idProduct, messageApi){
+    let dataBody = {comentario: messageApi};
+    
+    await $.ajax({
+        url: urlBase + 'pedidos/' + idProduct,
+        type: "PUT",
+        datatype: "json",
+        contentType: "application/json",
+        headers: {
+            "x-auth": token
+        },
+        path: {
+            "_id": idProduct
+        },
+        body: JSON.stringify(dataBody),
+        success: showProducts,
+
+        error: showError
+    });
+}
+
+
