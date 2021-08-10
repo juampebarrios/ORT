@@ -295,7 +295,6 @@ function showProducts(json){
                 $("#homeProducts").append(`<div class='content'><div>`);
                 $("#homeProducts").append(`<ons-button onclick="viewDetails('${json.data[i]._id}')"><ons-icon icon='ion-ios-list'></ons-icon></ons-button>`);
                 $("#homeProducts").append(`<ons-button onclick="addFavorite('${json.data[i]._id}')"><ons-icon icon='ion-ios-star'></ons-icon></ons-button>`);
-                // $("#homeProducts").append(`<ons-button onclick="buyProduct('${json.data[i]._id}')"><ons-icon icon='ion-ios-card'></ons-icon></ons-button>`);
                 $("#homeProducts").append(`</div>`);
                 $("#homeProducts").append(`</div>`);
                 $("#homeProducts").append(`</ons-card>`);
@@ -382,7 +381,7 @@ async function getDetails(){
                 actualPlace = $('#selectPlace').val();
                 findStoreLocationById(actualPlace);
                 await $.ajax({
-                    url: urlMapa + storeName + ',Montevideo',
+                    url: urlMapa + storeName + ', Montevideo',
                     type: 'GET',
                     dataType: "Json",
                     success:function (json){
@@ -403,6 +402,10 @@ async function getDetails(){
         error: showError
     })
 }
+
+$('#selectPlace').change(function(){
+    getDetails();
+})
 
 //BUSCAR DIRECCION SELECCIONADA PARA UBICAR EN EL MAPA
 async function findStoreLocationById(idStore){
@@ -612,4 +615,39 @@ function modalDialog(idProduct){
     });
 }
 
+function FiltroQR(){
+    cordova.plugins.barcodeScanner.scan(
+        function (result) {
+             if(!result.cancelled){
+                    if(result.format == "QR_CODE"){
+                         let value = result.text;                          
+                         console.log(value);
+                    }else{
+                       alert("Ops, se escaneo un código pero al parecer no es QR");
+                    }
+             }else{
+               alert("El usuario se ha saltado el escaneo.");
+             }
+          },
+          function (error) {
+               alert("Ha ocurrido un error: " + error);
+          },
+          
+    {
+        preferFrontCamera: false,
+        showFlipCameraButton: false,
+        torchOn: false,
+      }
+     );
+}
 
+
+function verificarConexion(){
+    if(navigator.connection.none){
+        ons.notification.toast("No tiene internet", {timeout:1500 })
+        haveConnection=false;
+    }
+    else{
+        haveConnection=true;
+    }
+    }
