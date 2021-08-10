@@ -1,10 +1,14 @@
 const urlBase = 'https://ort-tallermoviles.herokuapp.com/api/';
+let urlMapa = 'https://nominatim.openstreetmap.org/search?<params>'
 let token;
 let myNavigator;
 let menu;
 let activeUser;
 let activePage;
+let storeName;
 let actualPlace;
+let latitudOrigen;
+let longitudOrigen;
 
 //AL INICIAR
 ons.ready(getActiveUser);
@@ -34,11 +38,18 @@ async function getActiveUser() {
                 $("#itemSignup").hide();
                 $("#itemLogin").hide();
             },
-            
+
             error: showError
-            
+
         })
     }
+    navigator.geolocation.getCurrentPosition(GuardarUbicacionActual, showError);
+}
+
+//GUARDAMOS UBICACION DEL USUARIO
+function GuardarUbicacionActual(position){
+    latitudOrigen=position.coords.latitude;
+    longitudOrigen=position.coords.longitude;
 }
 
 //OCULTAR DIVS PARA USUARIOS NO LOGUEADOS
@@ -356,12 +367,65 @@ async function getDetails(){
                 $("#detail").append(`<ons-list-item><ons-input type='number' id="txtTotalOrder" modifier="underbar" placeholder="Cantidad" float></ons-input></ons-list-item>`);
                 $("#detail").append(`<ons-list-item><ons-button onclick="buyProduct('${json.data._id}')"><ons-icon icon='ion-ios-card'></ons-icon></ons-button></ons-list-item>`);
                 $("#detail").append("</ons-list>");
-                await loadPlaces();
-            }else{
-                
+                loadPlaces();
             }
+            
+            let map = L.map('mapId').setView([latitudOrigen,longitudOrigen], 10);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            
+            L.marker([latitudOrigen, longitudOrigen]).addTo(map)
+                .bindPopup('Esta es su ubicación')
+                .openPopup();
+                actualPlace = $('#selectPlace').val();
+                findStoreLocationById(actualPlace);
+                await $.ajax({
+                    url:'https://nominatim.openstreetmap.org/search?format=json&q='+storeName+',Montevideo',
+                    type: 'GET',
+                    dataType: "Json",
+                    success:function (json){
+                        console.log(json)
+                        if(json!=null && json.length>0){
+                        let storeLatitud= json[0].lat;
+                        let storeLength=json[0].lon;
+                        let distancia=map.distance([latitudOrigen,longitudOrigen],[storeLatitud,storeLength]);
+                        L.marker([storeLatitud,storeLength]).addTo(map)
+                        .bindPopup("La distancia entre el dispositivo y el destino es de " + distancia + "metros")
+                        .openPopup();
+                    }
+                },
+                    error: showError
+
+                })
         },
         error: showError
+    })
+}
+
+//BUSCAR DIRECCION SELECCIONADA PARA UBICAR EN EL MAPA
+async function findStoreLocationById(idStore){
+    await $.get({
+        url: urlBase + 'sucursales',
+        datatype: "json",
+        contentType: "application/json",
+        headers: {
+            "x-auth": token
+        },
+        success: function(json){
+            let i=0;
+            let locationFouded = false;
+            while (i<json.data.length && !locationFouded){
+                let actualLocation = json.data[i].direccion;
+                if(json.data[i]._id === idStore){
+                    storeName=actualLocation;
+                    locationFouded = true;
+                }
+                i++
+            }
+        },
+        Error: showError
     })
 }
 
@@ -453,7 +517,7 @@ async function loadPlaces(){
         datatype: "json",
         contentType: "application/json",
         headers: {
-            "x-auth": localStorage.getItem("token")
+            "x-auth": token
         },
         
         success: function(json){
@@ -486,9 +550,12 @@ async function buyProduct(idProduct){
             
             success: function(json){
                 console.log(json);
-            },
+                ons.notification.toast('Su compra ha sido exitosa!', {
+                    timeout: 1500
+                })
     
             error: showError
+            }
         })
     }
 }
@@ -509,22 +576,21 @@ async function getCart(){
     })
 }
 
+//ABRE CUADRO DE TEXTO PARA MANDAR COMENTARIO SI EL PEDIDO ESTA PENDIENTE
 function modalDialog(idProduct){
         ons.notification.prompt('Ingrese su comentario')
         .then(function(input) {
         let message = input ? 'Su mensaje fue enviado correctamente: ' + input : 'No ha ingresado ningún mensaje!';
         ons.notification.alert(message);
-        let messageApi = input;
-        if(messageApi.trim().length > 0){
-            changeProductStatus(idProduct, messageApi);
-        }
+        changeProductStatus(idProduct, input)
     });
 }
 
-async function changeProductStatus(idProduct, messageApi){
+//PEGADA A LA API PARA CAMBIAR ESTADO DEL PRODUCTO
+ function changeProductStatus(idProduct, messageApi){
     let dataBody = {comentario: messageApi};
     
-    await $.ajax({
+     $.ajax({
         url: urlBase + 'pedidos/' + idProduct,
         type: "PUT",
         datatype: "json",
@@ -532,11 +598,15 @@ async function changeProductStatus(idProduct, messageApi){
         headers: {
             "x-auth": token
         },
-        path: {
+        path:{
             "_id": idProduct
         },
-        body: JSON.stringify(dataBody),
-        success: showProducts,
+        data: JSON.stringify(dataBody),
+
+        success: function(json){
+            $("#homeCart").empty();
+            getCart();
+        },
 
         error: showError
     });
