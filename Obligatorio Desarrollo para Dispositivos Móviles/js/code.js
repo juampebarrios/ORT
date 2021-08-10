@@ -1,5 +1,5 @@
 const urlBase = 'https://ort-tallermoviles.herokuapp.com/api/';
-let urlMapa = 'https://nominatim.openstreetmap.org/search?format=json&q=';
+const urlMapa = 'https://nominatim.openstreetmap.org/search?format=json&q=';
 let token;
 let myNavigator;
 let menu;
@@ -356,7 +356,6 @@ async function buscarProductoPorNombre(){
                 console.log(json);
                 $("#homeProducts").empty();
                 showProducts(json);
-                buscarProductosEtiqueta();
             }
         },
         
@@ -365,19 +364,7 @@ async function buscarProductoPorNombre(){
 
 }
 
-//BUSCAR PRODUCTO POR ETIQUETA
-async function buscarProductosEtiqueta(){
-    let nombre = $("#txtBuscarProducto").val();
-    await $.get({
-        url: urlBase + 'productos' + '?nombre=' + nombre,
-        type: "GET",
-        datatype: "json",
-        contentType: "application/json",
-        headers: {
-            "x-auth": token
-        },
-    })
-}
+
 
 // VER DETALLES
 function viewDetails(idProduct){
