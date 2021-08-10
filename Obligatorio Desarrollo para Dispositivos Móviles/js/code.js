@@ -256,7 +256,7 @@ function showProducts(json){
                 $("#homeProducts").append(`<div class='content'><div>`);
                 $("#homeProducts").append(`<ons-button onclick="viewDetails('${json.data[i]._id}')"><ons-icon icon='ion-ios-list'></ons-icon></ons-button>`);
                 $("#homeProducts").append(`<ons-button onclick="addFavorite('${json.data[i]._id}')"><ons-icon icon='ion-ios-star'></ons-icon></ons-button>`);
-                $("#homeProducts").append(`<ons-button onclick="buyProduct('${json.data[i]._id}')"><ons-icon icon='ion-ios-card'></ons-icon></ons-button>`);
+                // $("#homeProducts").append(`<ons-button onclick="buyProduct('${json.data[i]._id}')"><ons-icon icon='ion-ios-card'></ons-icon></ons-button>`);
                 $("#homeProducts").append(`</div>`);
                 $("#homeProducts").append(`</div>`);
                 $("#homeProducts").append(`</ons-card>`);
@@ -270,7 +270,7 @@ function showProducts(json){
         $("#homeFavorites").append(`<div class='content'><div>`);
         $("#homeFavorites").append(`<ons-button onclick="viewDetails('${json.data._id}')"><ons-icon icon='ion-ios-list'></ons-icon></ons-button>`);
         $("#homeFavorites").append(`<ons-button onclick="deleteFavorite('${json.data._id}')"><ons-icon icon='ion-ios-remove-circle-outline'></ons-icon></ons-button>`);
-        $("#homeFavorites").append(`<ons-button onclick="buyProduct('${json.data._id}')"><ons-icon icon='ion-ios-card'></ons-icon></ons-button>`);
+        // $("#homeFavorites").append(`<ons-button onclick="buyProduct('${json.data._id}')"><ons-icon icon='ion-ios-card'></ons-icon></ons-button>`);
         $("#homeFavorites").append(`</div>`);
         $("#homeFavorites").append(`</div>`);
         $("#homeFavorites").append(`</ons-card>`);
@@ -292,8 +292,15 @@ async function getDetails(){
             "x-auth": token
         },
         success: function (json) {
+            $("#detail").append(`<img src='https://ort-tallermoviles.herokuapp.com/assets/imgs/${json.data.urlImagen}.jpg' alt='${json.data.nombre}'  style='width: 100%'>`);
+            $("#detail").append(`${json.data.nombre}`);
             $("#detail").append("<ons-list>Detalles");
-            $("#detail").append("<ons-list-item>" + json.data.precio + "</ons-list-item>");
+            $("#detail").append(`<ons-list-item> ${json.data.descripcion}: $${json.data.precio} </ons-list-item>`);
+            $("#detail").append(`<ons-list-item> Estado: ${json.data.estado}. </ons-list-item>`);
+            $("#detail").append(`<ons-list-item> Calificación: ${json.data.puntaje}. </ons-list-item>`);
+            if (json.data.estado === 'en stock'){
+                $("#detail").append(`<ons-list-item><ons-button onclick="buyProduct('${json.data._id}')"><ons-icon icon='ion-ios-card'></ons-icon></ons-button></ons-list-item>`);
+            }
             $("#detail").append("</ons-list>");
         },
         error: showError
@@ -380,3 +387,4 @@ async function deleteFavorite(idProduct){
         }
     }
 }
+
