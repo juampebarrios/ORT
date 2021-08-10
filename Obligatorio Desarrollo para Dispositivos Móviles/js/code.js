@@ -169,17 +169,19 @@ function validateEmail(email){
 
 // DIRECCION VALIDA
 function validateAddress(address){
-    //FALTA VALIDAR!!!
     let isValid = false;
-    isValid = true;
+    if(address.length.trim() > 0){
+        isValid = true;
+    }
     return isValid;
 }
 
 // PASSWORD VALIDO
 function validatePassword(password){
-    //FALTA VALIDAR!!!
     let isValid = false;
-    isValid = true;
+    if(password.length.trim() >= 8 && ){
+        isValid = true;
+    }
     return isValid;
 }
 
