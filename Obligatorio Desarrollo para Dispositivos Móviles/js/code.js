@@ -287,6 +287,7 @@ async function getProducts() {
 // MOSTRAR PRODUCTOS
 function showProducts(json){
     if (activePage === 'products'){
+        $("#homeProducts").append(`<ons-button onclick="filtroQR('btnQR')"><ons-icon icon='md-zoom-in'>  Buscar por QR</ons-icon></ons-button>`);
         if (json.data.length > 0){
             for (let i=0; i < json.data.length; i++){
                 $("#homeProducts").append("<ons-card>");
@@ -615,7 +616,7 @@ function modalDialog(idProduct){
     });
 }
 
-function FiltroQR(){
+function filtroQR(){
     cordova.plugins.barcodeScanner.scan(
         function (result) {
              if(!result.cancelled){
