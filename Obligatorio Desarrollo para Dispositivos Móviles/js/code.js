@@ -1,5 +1,5 @@
 const urlBase = 'https://ort-tallermoviles.herokuapp.com/api/';
-let urlMapa = 'https://nominatim.openstreetmap.org/search?<params>'
+let urlMapa = 'https://nominatim.openstreetmap.org/search?format=json&q=';
 let token;
 let myNavigator;
 let menu;
@@ -367,7 +367,7 @@ async function getDetails(){
                 $("#detail").append(`<ons-list-item><ons-input type='number' id="txtTotalOrder" modifier="underbar" placeholder="Cantidad" float></ons-input></ons-list-item>`);
                 $("#detail").append(`<ons-list-item><ons-button onclick="buyProduct('${json.data._id}')"><ons-icon icon='ion-ios-card'></ons-icon></ons-button></ons-list-item>`);
                 $("#detail").append("</ons-list>");
-                loadPlaces();
+                await loadPlaces();
             }
             
             let map = L.map('mapId').setView([latitudOrigen,longitudOrigen], 10);
@@ -382,7 +382,7 @@ async function getDetails(){
                 actualPlace = $('#selectPlace').val();
                 findStoreLocationById(actualPlace);
                 await $.ajax({
-                    url:'https://nominatim.openstreetmap.org/search?format=json&q='+storeName+',Montevideo',
+                    url: urlMapa + storeName + ',Montevideo',
                     type: 'GET',
                     dataType: "Json",
                     success:function (json){
@@ -422,7 +422,7 @@ async function findStoreLocationById(idStore){
                     storeName=actualLocation;
                     locationFouded = true;
                 }
-                i++
+                i++;
             }
         },
         Error: showError
