@@ -143,17 +143,19 @@ async function signUp() {
 
 // NOMBRE VALIDO
 function validateName(name){
-    //FALTA VALIDAR!!!
     let isValid = false;
-    isValid = true;
+    if(name.length.trim() > 0 && isNaN(name.trim())){
+        isValid = true;
+    }
     return isValid;
 }
 
 // APELLIDO VALIDO
 function validateLastName(lastname){
-    //FALTA VALIDAR!!!
     let isValid = false;
-    isValid = true;
+    if(lastname.length.trim() > 0 && isNaN(lastname.trim())){
+        isValid = true;
+    }
     return isValid;
 }
 
