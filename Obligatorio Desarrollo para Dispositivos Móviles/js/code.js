@@ -37,6 +37,7 @@ async function getActiveUser() {
                 $("#itemMycart").show();
                 $("#itemSignup").hide();
                 $("#itemLogin").hide();
+                verificarConexion();
             },
 
             error: showError
@@ -113,7 +114,7 @@ function navigate(pageToGo, resetStack, data) {
 function showError(json) {
     let status = json.status;
     if (status === 400) {
-        $('#message').html('Verifique los datos ingresados');
+        ons.notification.toast('Algo salió mal!');
     }
 }
 
@@ -253,7 +254,9 @@ async function logIn() {
         })
 
     }catch(Error){
-        $('#message').html(Error.message);
+        ons.notification.toast(Error.message, {
+            timeout: 1500
+        })
     }
 }
 
@@ -288,7 +291,7 @@ async function getProducts() {
 function showProducts(json){
     if (activePage === 'products'){
         $("#homeProducts").append(`<ons-input type='text' id="txtBuscarProducto" modifier="underbar" placeholder="Nombre del producto" float></ons-input>`);
-        $("#homeProducts").append(`<ons-button onclick=""><ons-icon icon='md-zoom-in'></ons-icon></ons-button>`);
+        $("#homeProducts").append(`<ons-button onclick="buscarProductoPorNombre()" id="btnBuscar"><ons-icon icon='md-zoom-in'></ons-icon></ons-button>`);
         $("#homeProducts").append(`<ons-button onclick="filtroQR('btnQR')"><ion-icon name="qr-code"></ion-icon></ons-button>`);
         if (json.data.length > 0){
             for (let i=0; i < json.data.length; i++){
@@ -335,6 +338,45 @@ function showProducts(json){
             }
         }
     }
+}
+
+//BUSCAMOS PRODUCTO POR NOMBRE
+async function buscarProductoPorNombre(){
+    let nombre = $("#txtBuscarProducto").val();
+    await $.get({
+        url: urlBase + 'productos' + '?nombre=' + nombre,
+        type: "GET",
+        datatype: "json",
+        contentType: "application/json",
+        headers: {
+            "x-auth": token
+        },
+        success: function(json){
+            if(json.data.length>0){
+                console.log(json);
+                $("#homeProducts").empty();
+                showProducts(json);
+                buscarProductosEtiqueta();
+            }
+        },
+        
+        error: showError
+    })
+
+}
+
+//BUSCAR PRODUCTO POR ETIQUETA
+async function buscarProductosEtiqueta(){
+    let nombre = $("#txtBuscarProducto").val();
+    await $.get({
+        url: urlBase + 'productos' + '?nombre=' + nombre,
+        type: "GET",
+        datatype: "json",
+        contentType: "application/json",
+        headers: {
+            "x-auth": token
+        },
+    })
 }
 
 // VER DETALLES
@@ -623,8 +665,9 @@ function filtroQR(){
         function (result) {
              if(!result.cancelled){
                     if(result.format == "QR_CODE"){
-                         let value = result.text;                          
-                         console.log(value);
+                         let QRvalue = result.text;                          
+                         console.log(QRvalue);
+                         buscarPorQR();
                     }else{
                        alert("Ops, se escaneo un código pero al parecer no es QR");
                     }
@@ -644,6 +687,26 @@ function filtroQR(){
      );
 }
 
+//BUSCAR PRODUCTO POR QR
+async function buscarPorQR(QRvalue){
+    await $.get({
+        url: urlBase + 'productos' + '?codigo=' + QRvalue,
+        type: "GET",
+        datatype: "json",
+        contentType: "application/json",
+        headers: {
+            "x-auth": token
+        },
+        success: function(json){
+            if(json.data.length>0){
+                console.log(json);
+                $("#homeProducts").empty();
+                showProducts(json);
+            }
+        },
+        error: showError,
+    })
+}
 
 function verificarConexion(){
     if(navigator.connection.none){
@@ -653,4 +716,4 @@ function verificarConexion(){
     else{
         haveConnection=true;
     }
-    }
+}

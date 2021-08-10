@@ -3,13 +3,13 @@
 <widget xmlns   = "http://www.w3.org/ns/widgets"
         id          = "com.tallerLilianaAgosto2021.app"
         version     = "1.0.0" >
-    <name>queComemosApp</name>
+    <name>Pinta Rico</name>
     <description>
-        App para ver qué comer
+        App de venta de comida
     </description>
 
-    <author href="https://www.linkedin.com/in/liliana/" email="lilianapatpino@gmail.com">
-       Liliana Pino
+    <author href="https://www.linkedin.com/in/joaqu%C3%ADn-su%C3%A1rez-754969164/" email="joaquin.suarez.s95@gmail.com">
+       Joaquin y Juan
     </author>
     
      <!-- https://build.phonegap.com/current-support -->
