@@ -382,4 +382,3 @@ async function deleteFavorite(idProduct){
         }
     }
 }
-
