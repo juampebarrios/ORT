@@ -380,4 +380,3 @@ async function deleteFavorite(idProduct){
         }
     }
 }
-
