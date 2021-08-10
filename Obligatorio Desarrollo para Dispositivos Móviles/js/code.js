@@ -179,7 +179,7 @@ function validateAddress(address){
 // PASSWORD VALIDO
 function validatePassword(password){
     let isValid = false;
-    if(password.length.trim() >= 8 && ){
+    if(password.length.trim() >= 8){
         isValid = true;
     }
     return isValid;
