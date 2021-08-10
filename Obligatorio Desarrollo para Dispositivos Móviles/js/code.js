@@ -289,7 +289,7 @@ function showProducts(json){
                 $("#homeProducts").append(`</div>`);
                 $("#homeProducts").append(`</ons-card>`);
             }
-        }
+        } 
     }
     if (activePage === 'favorites'){
         $("#homeFavorites").append("<ons-card>");
@@ -302,6 +302,24 @@ function showProducts(json){
         $("#homeFavorites").append(`</div>`);
         $("#homeFavorites").append(`</div>`);
         $("#homeFavorites").append(`</ons-card>`);
+    }
+    if (activePage === 'myCart'){
+        if (json.data.length > 0){
+            for (let i=0; i < json.data.length; i++){
+                let precioTotalXProducto = json.data.total * json.data.cantidad;
+                $("#homeCart").append("<ons-card>");
+                $("#homeCart").append(`<img src='https://ort-tallermoviles.herokuapp.com/assets/imgs/${json.data[i].urlImagen}.jpg' alt='${json.data[i].nombre}'  style='width: 100%'>`);
+                $("#homeCart").append(`<div class='title'>${json.data[i].nombre}</div>`);
+                $("#homeCart").append(`<div class='content'>`);
+                $("#homeCart").append(`<ons-list> Productos Seleccionados: `);
+                $("#homeCart").append(`<ons-list-item>Sucursal de retiro: ${json.sucursal.nombre}</ons-list-item>`);
+                $("#homeCart").append(`<ons-list-item>Precio total: ${precioTotalXProducto}</ons-list-item>`);
+                $("#homeCart").append(`<ons-list-item>Estado del pedido: ${json.data.estado}</ons-list-item>`);
+                $("#homeCart").append(`<ons-button onclick="showPrompt()">Prompt</ons-button>`);
+                $("#homeCart").append(`</div>`);
+                $("#homeCart").append(`</ons-card>`);
+            }
+        }
     }
 }
 
@@ -449,6 +467,7 @@ async function loadPlaces(){
 }
 
 
+<<<<<<< HEAD
 //FUNCION PARA COMPRAR PRODUCTO
 async function buyProduct(idProduct){
     let totalOrder = $('#txtTotalOrder').val();
@@ -473,4 +492,40 @@ async function buyProduct(idProduct){
             error: showError
         })
     }
+=======
+//FUNCION PARA MOSTRAR PEDIDOS
+async function getCart(){
+    await $.get({
+        url: urlBase + 'pedidos',
+        datatype: "json",
+        contentType: "application/json",
+        headers: {
+            "x-auth": localStorage.getItem("token")
+        },
+
+        success: showProducts,
+
+        error: showError
+    })
+}
+
+function modalDialog(){
+    let showTemplateDialog = function() {
+        let dialog = $('#myDialog').val();
+        if (dialog) {
+          dialog.show();
+        } else {
+          ons.createElement('dialog.html', { append: true })
+            .then(function(dialog) {
+              dialog.show();
+            });
+        }
+      };
+      
+      let hideDialog = function(id) {
+        document
+          .getElementById(id)
+          .hide();
+      };
+>>>>>>> 8b4162b827a465e7d57af463856eb7bf1ad22bb2
 }
