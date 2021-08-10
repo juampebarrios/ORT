@@ -331,7 +331,7 @@ function showProducts(json){
                 $("#homeCart").append(`<ons-list-item>Precio total: ${precioTotalXProducto}</ons-list-item>`);
                 $("#homeCart").append(`<ons-list-item>Estado del pedido: ${json.data[i].estado}</ons-list-item>`);
                 if(json.data[i].estado === "pendiente"){
-                    $("#homeCart").append(`<ons-button onclick="modalDialog('${json.data[i]._id}')">Comentar</ons-button>`);
+                    $("#homeCart").append(`<ons-button onclick="changeProductStatus('${json.data[i]._id}')">Comentar</ons-button>`);
                 }
                 $("#homeCart").append(`</div>`);
                 $("#homeCart").append(`</ons-card>`);
@@ -617,6 +617,7 @@ async function getCart(){
     })
 }
 
+<<<<<<< Updated upstream
 //ABRE CUADRO DE TEXTO PARA MANDAR COMENTARIO SI EL PEDIDO ESTA PENDIENTE
 function modalDialog(idProduct){
         ons.notification.prompt('Ingrese su comentario')
@@ -632,11 +633,31 @@ function modalDialog(idProduct){
     let dataBody = {comentario: messageApi};
     
      $.ajax({
+=======
+// function modalDialog(idProduct){
+//         ons.notification.prompt('Ingrese su comentario')
+//         .then(function(input) {
+//         let message = input ? 'Su mensaje fue enviado correctamente: ' + input : 'No ha ingresado ningún mensaje!';
+//         ons.notification.alert(message);
+//         let messageApi = input;
+//         if(messageApi.trim().length > 0){
+//             changeProductStatus(idProduct, messageApi);
+//         }
+//     });
+// }
+
+function changeProductStatus(idProduct){
+    let comment = 'hola'
+    let data = {comentario: comment};
+    
+    $.ajax({
+>>>>>>> Stashed changes
         url: urlBase + 'pedidos/' + idProduct,
         type: "PUT",
         datatype: "json",
         contentType: "application/json",
         headers: {
+<<<<<<< Updated upstream
             "x-auth": token
         },
         path:{
@@ -648,8 +669,17 @@ function modalDialog(idProduct){
             $("#homeCart").empty();
             getCart();
         },
+=======
+            "x-auth": token,
+            "id": idProduct
+        },
+        data: JSON.stringify(data),
+        success: showProducts,
+>>>>>>> Stashed changes
 
-        error: showError
+        error: function(json){
+            console.log(json)
+        }
     });
 }
 
