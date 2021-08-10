@@ -137,14 +137,14 @@ async function signUp() {
         })
 
     }catch(Error){
-        $('#message').html(Error.message);
+        ons.notification.alert(Error.message);
     }
 }
 
 // NOMBRE VALIDO
 function validateName(name){
     let isValid = false;
-    if(name.length.trim() > 0 && isNaN(name.trim())){
+    if(name.trim().length > 0 && isNaN(name.trim())){
         isValid = true;
     }
     return isValid;
@@ -153,7 +153,7 @@ function validateName(name){
 // APELLIDO VALIDO
 function validateLastName(lastname){
     let isValid = false;
-    if(lastname.length.trim() > 0 && isNaN(lastname.trim())){
+    if(lastname.trim().length > 0 && isNaN(lastname.trim())){
         isValid = true;
     }
     return isValid;
@@ -169,17 +169,19 @@ function validateEmail(email){
 
 // DIRECCION VALIDA
 function validateAddress(address){
-    //FALTA VALIDAR!!!
     let isValid = false;
-    isValid = true;
+    if(address.trim().length > 0){
+        isValid = true;
+    }
     return isValid;
 }
 
 // PASSWORD VALIDO
 function validatePassword(password){
-    //FALTA VALIDAR!!!
     let isValid = false;
-    isValid = true;
+    if(password.trim().length >= 8){
+        isValid = true;
+    }
     return isValid;
 }
 
