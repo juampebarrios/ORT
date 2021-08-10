@@ -466,8 +466,6 @@ async function loadPlaces(){
     })
 }
 
-
-<<<<<<< HEAD
 //FUNCION PARA COMPRAR PRODUCTO
 async function buyProduct(idProduct){
     let totalOrder = $('#txtTotalOrder').val();
@@ -492,7 +490,8 @@ async function buyProduct(idProduct){
             error: showError
         })
     }
-=======
+
+
 //FUNCION PARA MOSTRAR PEDIDOS
 async function getCart(){
     await $.get({
@@ -527,5 +526,4 @@ function modalDialog(){
           .getElementById(id)
           .hide();
       };
->>>>>>> 8b4162b827a465e7d57af463856eb7bf1ad22bb2
 }
