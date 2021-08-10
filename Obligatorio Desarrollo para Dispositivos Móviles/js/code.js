@@ -287,7 +287,9 @@ async function getProducts() {
 // MOSTRAR PRODUCTOS
 function showProducts(json){
     if (activePage === 'products'){
-        $("#homeProducts").append(`<ons-button onclick="filtroQR('btnQR')"><ons-icon icon='md-zoom-in'>  Buscar por QR</ons-icon></ons-button>`);
+        $("#homeProducts").append(`<ons-input type='text' id="txtBuscarProducto" modifier="underbar" placeholder="Nombre del producto" float></ons-input>`);
+        $("#homeProducts").append(`<ons-button onclick=""><ons-icon icon='md-zoom-in'></ons-icon></ons-button>`);
+        $("#homeProducts").append(`<ons-button onclick="filtroQR('btnQR')"><ion-icon name="qr-code"></ion-icon></ons-button>`);
         if (json.data.length > 0){
             for (let i=0; i < json.data.length; i++){
                 $("#homeProducts").append("<ons-card>");
