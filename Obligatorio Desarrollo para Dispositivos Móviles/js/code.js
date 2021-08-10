@@ -12,6 +12,7 @@ ons.ready(getActiveUser);
 async function getActiveUser() {
     if (token === null || token === undefined){
         getToken();
+        hideItems();
     }
     if (token) {
         await $.ajax({
@@ -26,12 +27,24 @@ async function getActiveUser() {
             success: function (json) {
                 activeUser = json.data._id;
                 navigate('products', true);
+                $("#itemProducts").show();
+                $("#itemFavorites").show();
+                $("#itemMycart").show();
+                $("#itemSignup").hide();
+                $("#itemLogin").hide();
             },
             
             error: showError
             
         })
     }
+}
+
+//OCULTAR DIVS PARA USUARIOS NO LOGUEADOS
+function hideItems(){
+    $("#itemProducts").hide();
+    $("#itemFavorites").hide();
+    $("#itemMycart").hide();
 }
 
 //OBTENER TOKEN
@@ -77,6 +90,9 @@ function navigate(pageToGo, resetStack, data) {
             break;
         case 'favorites':
             activePage = 'favorites';
+            break;
+        case 'mycart' :
+            activePage = 'mycart';
             break;
     }
 }
@@ -163,7 +179,10 @@ function validateLastName(lastname){
 function validateEmail(email){
     //FALTA VALIDAR!!!
     let isValid = false;
-    isValid = true;
+    let regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    if (regex.test(email)) {
+        isValid = true;
+    }
     return isValid;
 }
 
@@ -211,6 +230,11 @@ async function logIn() {
             success: function (json) {
                 localStorage.setItem("token", json.data.token);
                 getActiveUser();
+                $("#itemProducts").show();
+                $("#itemFavorites").show();
+                $("#itemMycart").show();
+                $("#itemSignup").hide();
+                $("#itemLogin").hide();
             },
 
             error: showError
@@ -226,6 +250,9 @@ function logOut() {
     localStorage.removeItem("token");
     token = null;
     navigate("login", true);
+    hideItems();
+    $("#itemSignup").show();
+    $("#itemLogin").show();
 }
 
 // TRAER PRODUCTOS
@@ -239,9 +266,7 @@ async function getProducts() {
             headers: {
                 "x-auth": localStorage.getItem("token")
             },
-            
             success: showProducts,
-    
             error: showError
         })
     }
