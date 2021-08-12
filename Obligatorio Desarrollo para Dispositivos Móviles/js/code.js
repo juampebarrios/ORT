@@ -352,16 +352,10 @@ async function buscarProductoPorNombre(){
             "x-auth": token
         },
         success: function(json){
-            if(nombre.trim().length>0){
-                if(json.data.length>0){
-                    console.log(json);
-                    $("#homeProducts").empty();
-                    showProducts(json);
-                }
-            }else{
-                ons.notification.toast('No ha ingresado ningún nombre'), {
-                    timeout:1500
-                }
+            if(json.data.length>0){
+                console.log(json);
+                $("#homeProducts").empty();
+                showProducts(json);
             }
         },
         
