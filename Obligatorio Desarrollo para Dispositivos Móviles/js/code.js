@@ -364,8 +364,6 @@ async function buscarProductoPorNombre(){
 
 }
 
-
-
 // VER DETALLES
 function viewDetails(idProduct){
     navigate("detailsProduct", false, data = { idProduct: idProduct });
@@ -411,7 +409,7 @@ async function getDetails(){
                 .bindPopup('Esta es su ubicación')
                 .openPopup();
                 actualPlace = $('#selectPlace').val();
-                findStoreLocationById(actualPlace);
+                await findStoreLocationById(actualPlace);
                 await $.ajax({
                     url: urlMapa + storeName + ', Montevideo',
                     type: 'GET',
@@ -654,7 +652,7 @@ function filtroQR(){
                     if(result.format == "QR_CODE"){
                          let QRvalue = result.text;                          
                          console.log(QRvalue);
-                         buscarPorQR();
+                         buscarPorQR(QRvalue);
                     }else{
                        alert("Ops, se escaneo un código pero al parecer no es QR");
                     }
@@ -678,7 +676,6 @@ function filtroQR(){
 async function buscarPorQR(QRvalue){
     await $.get({
         url: urlBase + 'productos' + '?codigo=' + QRvalue,
-        type: "GET",
         datatype: "json",
         contentType: "application/json",
         headers: {
