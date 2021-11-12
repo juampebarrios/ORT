@@ -1,0 +1,27 @@
+C:\Users\Joaquín\Desktop\ORT\Programacion2\Obligatorio\Obligatorio\Dominio\bin\Debug\netstandard2.0\Dominio.deps.json
+C:\Users\Joaquín\Desktop\ORT\Programacion2\Obligatorio\Obligatorio\Dominio\bin\Debug\netstandard2.0\Dominio.dll
+C:\Users\Joaquín\Desktop\ORT\Programacion2\Obligatorio\Obligatorio\Dominio\bin\Debug\netstandard2.0\Dominio.pdb
+C:\Users\Joaquín\Desktop\ORT\Programacion2\Obligatorio\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.csprojAssemblyReference.cache
+C:\Users\Joaquín\Desktop\ORT\Programacion2\Obligatorio\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.AssemblyInfoInputs.cache
+C:\Users\Joaquín\Desktop\ORT\Programacion2\Obligatorio\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.AssemblyInfo.cs
+C:\Users\Joaquín\Desktop\ORT\Programacion2\Obligatorio\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\Joaquín\Desktop\ORT\Programacion2\Obligatorio\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.dll
+C:\Users\Joaquín\Desktop\ORT\Programacion2\Obligatorio\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.pdb
+C:\Users\juamp\OneDrive\Desktop\Obligatorio\Dominio\bin\Debug\netstandard2.0\Dominio.deps.json
+C:\Users\juamp\OneDrive\Desktop\Obligatorio\Dominio\bin\Debug\netstandard2.0\Dominio.dll
+C:\Users\juamp\OneDrive\Desktop\Obligatorio\Dominio\bin\Debug\netstandard2.0\Dominio.pdb
+C:\Users\juamp\OneDrive\Desktop\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.csprojAssemblyReference.cache
+C:\Users\juamp\OneDrive\Desktop\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.AssemblyInfoInputs.cache
+C:\Users\juamp\OneDrive\Desktop\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.AssemblyInfo.cs
+C:\Users\juamp\OneDrive\Desktop\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\juamp\OneDrive\Desktop\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.dll
+C:\Users\juamp\OneDrive\Desktop\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.pdb
+C:\Users\juamp\Desktop\ORT\Segundo Semestre\Programación 2\OBLIGATORIO 1\Obligatorio\Dominio\bin\Debug\netstandard2.0\Dominio.deps.json
+C:\Users\juamp\Desktop\ORT\Segundo Semestre\Programación 2\OBLIGATORIO 1\Obligatorio\Dominio\bin\Debug\netstandard2.0\Dominio.dll
+C:\Users\juamp\Desktop\ORT\Segundo Semestre\Programación 2\OBLIGATORIO 1\Obligatorio\Dominio\bin\Debug\netstandard2.0\Dominio.pdb
+C:\Users\juamp\Desktop\ORT\Segundo Semestre\Programación 2\OBLIGATORIO 1\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.csprojAssemblyReference.cache
+C:\Users\juamp\Desktop\ORT\Segundo Semestre\Programación 2\OBLIGATORIO 1\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\juamp\Desktop\ORT\Segundo Semestre\Programación 2\OBLIGATORIO 1\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.AssemblyInfoInputs.cache
+C:\Users\juamp\Desktop\ORT\Segundo Semestre\Programación 2\OBLIGATORIO 1\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.AssemblyInfo.cs
+C:\Users\juamp\Desktop\ORT\Segundo Semestre\Programación 2\OBLIGATORIO 1\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.dll
+C:\Users\juamp\Desktop\ORT\Segundo Semestre\Programación 2\OBLIGATORIO 1\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.pdb

@@ -1,0 +1,82 @@
+﻿@using Dominio;
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Excursiones</h2>
+<br>
+@if (Session["rol"] != null)
+{
+    <h4>Comprar paquete de viaje:</h4>
+    <select class="form-control" id="selectID">
+        @foreach (Excursion unaE in ViewBag.Excursiones)
+        {
+            if (unaE.Stock > 1)
+            {
+                <option selected value="@unaE.Id()">@unaE.ToString()</option>
+            }
+        }
+    </select>
+    
+}
+
+<table class="table table-hover table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Excursion</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Excursion unaE in ViewBag.Excursiones)
+        {
+            if (unaE.Stock >= 1)
+            {
+                if (Session["rol"] == null)
+                {
+                    <tr>
+                        <td>@unaE.Id()</td>
+                        <td>@unaE.ToString()</td>
+                        <td>@unaE.Descripcion()</td>
+                        <td>@unaE.FechaComienzo()</td>
+                        <td>@unaE.FechaFin()</td>
+                        <td>@unaE.Stock</td>
+
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td>@unaE.Id()</td>
+                        <td>@unaE.ToString()</td>
+                        <td>@unaE.Descripcion()</td>
+                        <td>@unaE.FechaComienzo()</td>
+                        <td>@unaE.FechaFin()</td>
+                        <td>@unaE.Stock</td>
+                        <td><a href="/Excursion/CompraExcursionesDetalle?idEx=@unaE.Id()" class="btn btn-success"> Comprar </a></td>
+                    </tr>
+                }
+            }
+        }
+
+    </tbody>
+</table>
+
+<div id="formulario"></div>
+
+
+@section scripts{
+
+    <script type="text/javascript">
+        $("#selectID").change(comprar);
+
+        
+        function comprar() {
+            window.location.href = "/Excursion/CompraExcursiones?idEx=" + $("#selectID").val();
+
+        }
+
+
+
+
+    </script>
+    }

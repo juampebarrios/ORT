@@ -1,0 +1,30 @@
+﻿@using Dominio;
+@{
+    ViewBag.Title = "ListarExcursionesMenor";
+}
+
+<h2>Listar Excursiones</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Excursiones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Compra unaC in ViewBag.Compras)
+        {
+            
+                {
+                    <tr>
+                        <td>@unaC.IdCompra</td>
+                        <td>@unaC.PasajerosMenores</td>
+                        <td>@unaC.UsuarioComprador</td>
+
+                    </tr>
+                } 
+        }
+
+    </tbody>
+</table>
+

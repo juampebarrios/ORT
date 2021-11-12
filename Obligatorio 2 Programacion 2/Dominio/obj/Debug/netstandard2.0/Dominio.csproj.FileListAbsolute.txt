@@ -1,0 +1,18 @@
+C:\Users\juamp\Desktop\Obligatorio (6)\Obligatorio\Dominio\bin\Debug\netstandard2.0\Dominio.deps.json
+C:\Users\juamp\Desktop\Obligatorio (6)\Obligatorio\Dominio\bin\Debug\netstandard2.0\Dominio.dll
+C:\Users\juamp\Desktop\Obligatorio (6)\Obligatorio\Dominio\bin\Debug\netstandard2.0\Dominio.pdb
+C:\Users\juamp\Desktop\Obligatorio (6)\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.csprojAssemblyReference.cache
+C:\Users\juamp\Desktop\Obligatorio (6)\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\juamp\Desktop\Obligatorio (6)\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.AssemblyInfoInputs.cache
+C:\Users\juamp\Desktop\Obligatorio (6)\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.AssemblyInfo.cs
+C:\Users\juamp\Desktop\Obligatorio (6)\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.dll
+C:\Users\juamp\Desktop\Obligatorio (6)\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.pdb
+C:\Users\juamp\Desktop\ORT\Segundo Semestre\Programación 2\OBLIGATORIO 2\Obligatorio\Dominio\bin\Debug\netstandard2.0\Dominio.deps.json
+C:\Users\juamp\Desktop\ORT\Segundo Semestre\Programación 2\OBLIGATORIO 2\Obligatorio\Dominio\bin\Debug\netstandard2.0\Dominio.dll
+C:\Users\juamp\Desktop\ORT\Segundo Semestre\Programación 2\OBLIGATORIO 2\Obligatorio\Dominio\bin\Debug\netstandard2.0\Dominio.pdb
+C:\Users\juamp\Desktop\ORT\Segundo Semestre\Programación 2\OBLIGATORIO 2\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.csprojAssemblyReference.cache
+C:\Users\juamp\Desktop\ORT\Segundo Semestre\Programación 2\OBLIGATORIO 2\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\juamp\Desktop\ORT\Segundo Semestre\Programación 2\OBLIGATORIO 2\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.AssemblyInfoInputs.cache
+C:\Users\juamp\Desktop\ORT\Segundo Semestre\Programación 2\OBLIGATORIO 2\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.AssemblyInfo.cs
+C:\Users\juamp\Desktop\ORT\Segundo Semestre\Programación 2\OBLIGATORIO 2\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.dll
+C:\Users\juamp\Desktop\ORT\Segundo Semestre\Programación 2\OBLIGATORIO 2\Obligatorio\Dominio\obj\Debug\netstandard2.0\Dominio.pdb

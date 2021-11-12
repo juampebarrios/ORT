@@ -1,0 +1,419 @@
+/*
+Selector por id:  #
+Selector por clase: .clase
+Selector por Tag: nombredelaetiqueta / tipodeetiqueta
+*/
+
+body {
+    background-color: rgb(212, 139, 2);
+}
+
+
+/*BARRA DE LOGIN Y BUSQUEDA:*/
+.barra {
+    overflow: hidden;
+    background-color: #333;
+    margin: auto;
+    width: 100%;
+    border-radius: 12px
+}
+
+#txtSearch {
+    float: right;
+    margin-top: 20px;
+    font-family: tahoma;
+    font-size: large;
+    color: #333;
+    text-align: left;
+    text-decoration: none;
+    padding: 10px 10px;
+    border: 1px #333;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    
+}
+#txtSearch:hover{
+    background-color: white;
+}
+
+#btnSearch {
+    float: right;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 15px;
+    font-family: tahoma;
+    font-size: large;
+    color: orange;
+    background-color: #333;
+    text-align: center;
+    text-decoration: none;
+    padding: 9px 10px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    
+}
+#btnSearch:hover{
+    background-color: #ddd;
+    color: black;
+}
+
+#btnIngresar0, #btnCerrarSesion, #btnVolver {
+    float: left;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 15px;
+    font-family: tahoma;
+    font-size: large;
+    color: orange;
+    background-color: #333;
+    text-align: center;
+    text-decoration: none;
+    padding: 9px 10px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 12px
+    
+}
+#btnIngresar0:hover, #btnCerrarSesion:hover, #btnVolver:hover{
+    background-color: #ddd;
+    color: black;
+}
+
+#txtUserName, #txtPassword {
+    float: left;
+    margin-top: 20px;
+    margin-left: 15px;
+    font-family: tahoma;
+    font-size: large;
+    color: #333;
+    text-align: left;
+    text-decoration: none;
+    padding: 10px 10px;
+    border: 1px #333;
+    border-radius: 12px
+    
+}
+#txtUserName:hover, #txtPassword:hover{
+    background-color: white;
+}
+
+#btnIngresar, #btnCancelar {
+    float: left;
+    margin-top: 20px;
+    margin-left: 15px;
+    margin-right: 0px;
+    font-family: tahoma;
+    font-size: large;
+    color: orange;
+    background-color: #333;
+    text-align: center;
+    text-decoration: none;
+    padding: 9px 10px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 12px
+}
+
+#btnIngresar:hover, #btnCancelar:hover{
+    background-color: #ddd;
+    color: black;
+}
+
+#pIngreso{
+    font-size: 18px;
+    font-family: tahoma;
+    text-align: center;
+    text-decoration: underline;
+    text-shadow: 1px 1px #333;
+    color: rgb(221, 4, 4);
+    background-color: rgb(212, 139, 2);
+}
+
+/*PAGINA:*/
+.pagina {
+    background-color: white;
+    margin: auto;
+    width: 65%;
+    margin-top: 10px;
+    border-radius: 12px;
+}
+
+
+#imgLogo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 30px;
+    width: 50%;
+}
+
+table {
+    font-family: tahoma;
+    color: #333;
+    background-color: white;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #333;
+}
+
+th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: orange;
+    color:#333;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+hr{
+    width: 70%;
+    color: #333;
+}
+
+h1{
+    font-family: tahoma;
+    font-size: 40px;
+    text-align: center;
+    color: #333;
+    padding-top: 25px;
+    text-shadow: 5px 5px #ddd;
+}
+
+h2{
+    font-family: tahoma;
+    text-align: center;
+    color: #333;
+    text-shadow: 5px 5px #ddd;
+}
+
+.encabezado{
+    text-align: center;
+}
+
+.encabezado hr{
+    width: 45%;
+    color: #333;
+}
+
+#btnMostrarCol, #btnAgregarCol, #btnReportes, #btnAgregarRecetaA, #btnAgregarRecetaC{
+    font-family: tahoma;
+    font-size: medium;
+    color: orange;
+    background-color: #333;
+    padding: 10px 10px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    width: 23%;
+    border-radius: 12px
+}
+
+#btnMostrarCol:hover, #btnAgregarCol:hover, #btnReportes:hover, #btnAgregarRecetaA:hover, #btnAgregarRecetaC:hover{
+    background-color: #ddd;
+    color: black;
+}
+
+
+label{
+    font-family: tahoma;
+    font-size: medium;
+    color: #333;
+}
+
+#txtNombre, #txtApellido, #txtTituloRecetaA, #txtTiempoDePreparacionA, #txtTituloRecetaC, #txtTiempoDePreparacionC{
+    font-family: tahoma;
+    font-size: medium;
+    color: #333;
+    text-align: left;
+    padding: 5px 5px;
+    border: 1px solid #333;
+    border-radius: 12px
+}
+
+#txtProcedimientoA, #txtProcedimientoC{
+    font-family: tahoma;
+    font-size: medium;
+    width: 70%;
+    height: 200px;
+    box-sizing: border-box;
+    border-color: 1px #333;
+    border-radius: 12px
+}
+
+p{
+    font-family: tahoma;
+    font-size: medium;
+    color:#333;
+}
+
+#btnCrearCol, #btnCrearRecetaA, #btnCrearRecetaC{
+    font-family: tahoma;
+    font-size: medium;
+    color: orange;
+    background-color: #333;
+    padding: 6px 6px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    width: 100px;
+    border-radius: 12px
+}
+
+#btnCrearCol:hover,#btnCrearRecetaA:hover, #btnCrearRecetaC:hover{
+    background-color:#ddd;
+    color: black;
+}
+
+#btnHabilitarDeshabilitar, #btnReporteDuracionRecetas, #btnReporteRendimiento{
+    font-family: tahoma;
+    font-size: medium;
+    color: orange;
+    background-color: #333;
+    padding: 6px 6px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    width: 300px;
+    border-radius: 12px
+}
+
+#btnHabilitarDeshabilitar:hover, #btnReporteDuracionRecetas:hover, #btnReporteRendimiento:hover{
+    background-color:#ddd;
+    color: black;
+    
+}
+
+#txtReporteTiempo{
+    font-family: tahoma;
+    font-size: medium;
+    color: #333;
+    text-align: left;
+    padding: 5px 5px;
+    border: 1px solid #333;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    float: left;
+}
+
+#btnReporteTiempo{
+    font-family: tahoma;
+    font-size: medium;
+    color: orange;
+    background-color: #333;
+    text-align: center;
+    text-decoration: none;
+    padding: 6px 6px;
+    cursor: pointer;
+    border: none;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+#btnReporteTiempo:hover{
+    background-color:#ddd;
+    color: black;
+    
+}
+
+/*RECETAS:*/
+#titulo{
+    font-size: 20px;
+    font-family: tahoma;
+    text-align: center;
+    color: #333;
+    text-shadow: 5px 5px #ddd;
+}
+
+.numero {
+    font-size: 15px;
+    font-family: tahoma;
+    padding-left: 25px;
+    color: #666
+}
+
+#tiempo{
+    font-size: 15px;
+    font-family: tahoma;
+    padding-left: 25px;
+    color: orange;
+}
+
+ #procedimiento{
+     font-size: 15px;
+     font-family: tahoma;
+     padding-left: 25px;
+    color: #333;
+    white-space: pre-line;
+}
+
+ #autor{
+    font-size: 15px;
+    font-family: tahoma;
+    text-align: center;
+    color: orange;
+    text-shadow: 2px 2px #ddd;
+}
+
+ .recetas img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding:5px;
+}
+
+ .botonesMG, .botonesNMG {
+    font-family: tahoma;
+    font-size: medium;
+    color: orange;
+    background-color: #333;
+    text-align: center;
+    padding: 10px 10px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    width: 120px;
+    border-radius: 12px;
+}
+
+ .botonesMG:hover{
+    color: #ddd;
+    background-color:rgb(36, 223, 19);
+}
+
+ .botonesNMG:hover{
+    color: #ddd;
+    background-color: red;
+}
+
+ .botonesMG:disabled{
+    color: #ddd;
+    background-color: rgb(1, 75, 1);
+}
+
+ .botonesNMG:disabled{
+    color: #ddd;
+    background-color: rgb(92, 0, 0);
+}
+
+ #divLikes{
+    font-family: tahoma;
+    font-size: medium;
+    text-align: center;
+    color: #333;
+}
+
+ span{
+    text-align: center;
+    padding-right: 60px;
+    padding-left: 60px;
+}
+
+

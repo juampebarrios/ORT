@@ -1,0 +1,33 @@
+﻿@using Dominio
+
+@{
+    ViewBag.Title = "Registro";
+}
+
+<h2>Formulario de registro</h2>
+
+@Html.Raw(ViewBag.Mensaje)
+
+<form method="post">
+    <div class="form-group">
+        <label for="nombre">Nombre: </label>
+        <input class="form-control" type="text" required name="nombre" placeholder="Ingrese nombre" value="@ViewBag.Nombre" minlength="2" />
+        <br>
+        <label for="apellido">Apellido: </label>
+        <input class="form-control" type="text" required name="apellido" placeholder="Ingrese apellido" value="@ViewBag.Apellido" minlength="2" />
+        <br>
+        <label for="cedula">Documento de identidad: </label>
+        <input class="form-control" type="number" required name="cedula" placeholder="Ingrese docuemento de identidad" minlength="7" maxlength="9" />
+        <p class="text-info">(Sin puntos ni guiones)</p>
+        <label for="password">Contraseña: </label>
+        <input class="form-control" type="password" required name="password" placeholder="Ingrese contraseña" minlength="6" />
+        <p class="text-info">La contraseña debe tener más de 6 caracteres, y contar con minúsculas, mayúsculas y números.</p>
+        <label for="rol">Tipo de Usuario: </label>
+        <select class="form-control" name="rol">
+            <option value="Cliente">Cliente</option>
+        </select>
+    </div>
+    
+    <input class="btn btn-primary" type="submit" value="Crear Cuenta" />
+</form>
+

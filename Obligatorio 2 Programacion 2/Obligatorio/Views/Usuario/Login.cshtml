@@ -1,0 +1,21 @@
+﻿@using Dominio
+@model 
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+@Html.Raw(ViewBag.Mensaje)
+
+<form method="post">
+    <div class="form-group">
+        <label for="username">Documento de Identidad:</label>
+        <input class="form-control" type="number" name="cedula" placeholder="Ingrese documento de identidad" required/>
+        <p class="text-info">(Sin puntos ni guiones)</p>
+        <label for="password">Contraseña:</label>
+        <input class="form-control" type="password" name="password" placeholder="Ingrese contraseña" required/><br />
+    </div>
+        <input class="btn btn-primary" type="submit" value="Ingresar" />
+</form>
+

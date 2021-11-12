@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="data:,">
+        <link href="estilo.css" type="text/css" rel="stylesheet"/>
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="misClases.js"></script>
+        <script type="text/javascript" src="miCodigo.js"></script>
+        <title>Obligatorio</title>
+    </head>
+    <body>
+        <div class="barra">
+            <div id="divLogin">
+                <input type="button" id="btnIngresar0" value="Ingresar"/>
+                <input type="button" id="btnCerrarSesion" value="Cerrar Sesión"/>
+                <input type="button" id="btnVolver" value="Volver"/>
+                <input type="button" value="Buscar" id="btnSearch">
+                <input type="text" placeholder="Ingrese búsqueda..." id="txtSearch">
+            </div>
+            <div id="divIngreso">
+                <input type="text" id="txtUserName" placeholder="Nombre de Usuario"/>
+                <input type="password" id="txtPassword" placeholder="Contraseña"/>
+                <input type="button" id="btnIngresar" value="Ingresar"/>
+                <input type="button" id="btnCancelar" value="Cancelar"/><br>
+            </div>
+        </div>
+        <div class="pagina" id="divError">
+            <p id="pIngreso"></p>
+        </div>
+        <div id="divAdministrador" class="pagina";>
+            <div class="encabezado">
+                <h1 id="hAd"></h1>
+                <hr>
+                <br>
+                <input type="button" id="btnAgregarCol" value="Agregar Colaboradores"/>
+                <input type="button" id="btnMostrarCol" value="Mostrar Colaboradores"/>
+                <input type="button" id="btnReportes" value="Reportes"/>
+                <input type="button" id="btnAgregarRecetaA" value="Agregar Receta"/>
+                <br><br>
+                <hr>
+            </div>
+            <div class="pagina" id="divCrearColaborador">
+                <h2>Crear Colaboradores:</h2>
+                <label>Ingrese Nombre: </label><input type="text" id="txtNombre" placeholder="Nombre"/><br><br>
+                <label>Ingrese Apellido: </label><input type="text" id="txtApellido" placeholder="Apellido"/><br><br>
+                <input type="button" id="btnCrearCol" value="Crear"/>
+                <p id="pCrearCol"> </p>
+                <br>
+                <hr>
+            </div>
+            <div class="pagina" id="divMostrarColaboradores">
+                <h2>Lista de Colaboradores:</h2>
+                <div id="divPlanillaColaboradores"></div>
+                <p id="pHabilitarCol"></p>
+                <br>
+                <hr>
+            </div>  
+            <div class="pagina" id="divReportes">
+                <h2>Reportes:</h2>
+                <input type="text" id="txtReporteTiempo" placeholder="Ingrese tiempo en minutos."/>
+                <input type="button" id="btnReporteTiempo" value="Buscar"/>
+                <p id="pDuracionEnMin"></p><br>
+                <input type="button" id="btnReporteDuracionRecetas" value="Mostrar recetas con mayor duración"/>
+                <p id="pMayorDuracion"></p><br>
+                <input type="button" id="btnReporteRendimiento" value="Mostrar rendimiento de recetas"/>
+                <p id="pRendimientoRecetas"></p><br>
+                <hr>
+            </div>
+            <div class="pagina" id="divAgregarRecetasA">
+                <h2>Crear Recetas:</h2>
+                <label for="txtTituloRecetaA">Ingrese Título: </label><br><input type="text" id="txtTituloRecetaA" placeholder="Ingrese Título"/><br><br>
+                <label for="txtTiempoDePreparacionA">Ingrese Tiempo de Preparación: </label><br><input type="text" id="txtTiempoDePreparacionA" placeholder="(en minutos)"/><br><br>
+                <label for="txtProcedimientoA">Ingrese Procedimiento: </label><br><textarea id="txtProcedimientoA" placeholder="Procedimiento (máx. 150 caracteres)"></textarea><br><br>
+                <label for="fileFotoA">Seleccione una Foto: </label><br><input type="file" id="fileFotoA"/><br><br>
+                <input type="button" id="btnCrearRecetaA" value="Crear"/><br>
+                <p id="pCrearRecetaA"></p>
+                <br>
+                <hr>
+            </div>
+        </div>
+
+        <div id="divColaborador" class="pagina";>
+            <div class="encabezado">
+                <h1 id="hCol"></h1>
+                <hr>
+                <br>
+                <input type="button" id="btnAgregarRecetaC" value="Agregar Receta"/><br><br>
+                <hr>
+            </div>
+            <div class="pagina" id="divAgregarRecetasC">
+                <h2>Crear Recetas:</h2>
+                <label for="txtTituloRecetaC">Ingrese Título: </label><br><input type="text" id="txtTituloRecetaC" placeholder="Ingrese Título"/><br><br>
+                <label for="txtTiempoDePreparacionC">Ingrese Tiempo de Preparación: </label><br><input type="text" id="txtTiempoDePreparacionC" placeholder="(en minutos)"/><br><br>
+                <label for="txtProcedimientoC">Ingrese Procedimiento: </label><br><textarea id="txtProcedimientoC" placeholder="Procedimiento (máx. 150 caracteres)"></textarea><br><br>
+                <label for="fileFotoC">Seleccione una Foto: </label><br><input type="file" id="fileFotoC"/><br><br>
+                <input type="button" id="btnCrearRecetaC" value="Crear"/><br>
+                <p id="pCrearRecetaC"></p>
+                <br>
+                <hr>
+            </div>
+        </div>
+        <div class="pagina" id="divMostrarRecetaBuscada"> </div>
+        <div class="pagina" id="divUsuarioFinal";>
+            <img src="Imagenes/Pagina/Logo.png" id="imgLogo">
+            <p id="pMostrarRecetaPre"></p>
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,30 @@
+﻿@using Dominio;
+@{
+    ViewBag.Title = "MostrarClientes";
+}
+
+<h2>MostrarClientes</h2>
+
+<table class="table table-hover table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Clientes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Usuario unU in ViewBag.Clientes)
+        {
+            if (unU.Rol == "Cliente")
+            {
+                <tr>
+                    <td>@unU.Nombre</td>
+                    <td>@unU.Apellido</td>
+                    <td>@unU.Cedula</td>
+                </tr>
+
+            }
+        }
+
+    </tbody>
+</table>
+

@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "CompraExcursionesDetalle";
+}
+
+<h2>CompraExcursionesDetalle</h2>
+
+@ViewBag.Excursion
+
+
+
+<form method="post">
+    <label>Excursion:</label>
+    <input type="text" name="idExc" value="@ViewBag.Id" />
+
+    <label>Pasajeros Mayores:</label>
+    <input type="text" name="mayores" value="" />
+
+    <label>Pasajeros Menores:</label>
+    <input type="text" name="menores" value="" />
+
+    <label>Monto en U$S: </label>
+    <input type="text" name="monto" value="@ViewBag.Monto"/>
+
+    <label> Fecha de compra: </label> <input type="Date" name="fecha"/>
+
+    <button type="submit"> Comprar </button>
+</form>

@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Magic Travel", "Index", "Agencia", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse pull-right">
+                <ul class="nav navbar-nav">
+
+                    @if (Session["rol"] == "Administrador")
+                    {
+                        <li><a href="~/Usuario/MostrarClientes"><span class="glyphicon glyphicon-star"></span> Clientes</a></li>
+                        <li><a href="~/Usuario/ComprasEntreFechas"><span class="glyphicon glyphicon-credit-card"></span> Compras</a></li>
+                        <li><a href="~/Usuario/Estadisticas"><span class="glyphicon glyphicon-dashboard"></span> Estadisticas</a></li>
+                    }
+
+                    @if (Session["rol"] == null)
+                    {
+                        <li><a href="~/Excursion/Index"><span class="glyphicon glyphicon-map-marker"></span> Excursiones</a></li>
+                        <li><a href="~/Usuario/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <li><a href="~/Usuario/Registro"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="~/Excursion/Index"><span class="glyphicon glyphicon-map-marker"></span> Excursiones</a></li>
+                        <li><a href="~/Usuario/Logout"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Joaquín Suárez - Juan Pedro Barrios - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    @RenderSection("scripts", required:false)
+</body>
+</html>
